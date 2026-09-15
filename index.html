@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f6f1e9" />
+    <meta name="description" content="A quiet, beautiful EPUB reader." />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Futura&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>readmore — EPUB reader</title>
+  </head>
+  <body>
+    <div class="app-shell" id="app">
+      <header class="topbar">
+        <a class="brand" href="#library" aria-label="Readmore library">read<span>more</span></a>
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <button class="crumb active" id="libraryCrumb">Library</button><span>/</span><span id="bookCrumb">My books</span>
+        </nav>
+        <button class="round-button menu-button" id="menuButton" aria-label="Open reading menu">☰</button>
+      </header>
+
+      <main>
+        <section class="library-view" id="libraryView">
+          <div class="library-intro"><p class="eyebrow">YOUR QUIET SHELF</p><h1>Read at your<br><em>own pace.</em></h1><p>Stories, essays and ideas — always close at hand.</p></div>
+          <div class="library-actions">
+            <button class="add-book" id="addBookButton" type="button" onclick="document.getElementById('epubInput').click()"><span>＋</span> Add an EPUB</button><input id="epubInput" type="file" accept=".epub,application/epub+zip" hidden />
+            <button class="icon-text" id="shareButton">⌁ <span>Share a book</span></button>
+          </div>
+          <div class="shelf-heading"><span>ON YOUR SHELF</span><small id="bookCount">3 books</small></div>
+          <div class="book-grid" id="bookGrid"></div>
+        </section>
+
+        <section class="reader-view hidden" id="readerView">
+          <aside class="toc-panel" id="tocPanel">
+            <div class="toc-top"><span class="eyebrow">CONTENTS</span><button class="close" data-close="tocPanel">×</button></div>
+            <h2 id="tocBookTitle">The Art of Stillness</h2><ol id="tocList"></ol>
+            <button class="delete-book" id="deleteBook">Delete this book</button>
+          </aside>
+          <div class="reader-stage" id="readerStage">
+            <div class="reader-meta"><button class="contents-link" id="contentsButton">☰ &nbsp; Contents</button><span id="chapterName">An introduction</span><button class="settings-link" id="settingsButton">Aa</button></div>
+            <div class="spread" id="spread"><article class="page" id="page">
+              <div class="page-kicker" id="chapterKicker">CHAPTER ONE</div>
+              <h1 id="chapterTitle">A little space<br>between things</h1>
+              <div class="chapter-rule"></div>
+              <div class="reader-copy" id="readerCopy"></div>
+            </article><article class="page page-two" id="pageTwo"><div class="reader-copy" id="readerCopyTwo"></div></article></div>
+            <div class="reader-footer"><span id="pageProgress">1 / 12</span><div class="progress"><i id="progressBar"></i></div><span id="percentProgress">8%</span></div>
+            <button class="tap-zone prev" id="prevPage" aria-label="Previous page"></button><button class="tap-zone next" id="nextPage" aria-label="Next page"></button>
+          </div>
+        </section>
+      </main>
+
+      <div class="settings-sheet" id="settingsSheet" aria-hidden="true">
+        <div class="sheet-handle"></div><div class="sheet-title"><span class="eyebrow">READING SETTINGS</span><button class="close" data-close="settingsSheet">×</button></div>
+        <div class="setting"><label>Appearance</label><div class="segmented" id="themePicker"><button data-theme="day" class="selected">☼ Day</button><button data-theme="night">☾ Night</button></div></div>
+        <div class="setting"><label>Type family</label><div class="font-options" id="fontPicker"><button class="selected" data-font="literata"><b>Literata</b><small>Thoughtful & warm</small></button><button data-font="georgia"><b>Georgia</b><small>Classic & familiar</small></button><button data-font="charter"><b>Charter</b><small>Clear & bookish</small></button><button data-font="helvetica"><b>Helvetica</b><small>Clean & modern</small></button><button data-font="futura"><b>Futura</b><small>Geometric & bright</small></button><button data-font="sans"><b>Microsoft Sans</b><small>Easy & neutral</small></button><button data-font="mono"><b>Consolas</b><small>Monospaced</small></button></div></div>
+        <div class="setting"><label>Text alignment</label><div class="segmented" id="alignPicker"><button data-align="justify" class="selected">Justified</button><button data-align="left">Left aligned</button></div></div>
+        <div class="setting type-size"><label>Text size</label><button id="smallerText">A−</button><input id="sizeSlider" type="range" min="16" max="26" value="19" /><button id="largerText">A+</button></div>
+      </div>
+      <div class="scrim" id="scrim"></div>
+      <div class="image-lightbox" id="lightbox"><button class="close" data-close="lightbox">×</button><button id="zoomOut">−</button><img id="lightboxImage" alt="Expanded book illustration"/><button id="zoomIn">＋</button></div>
+    </div>
+    <template id="bookCardTemplate"><article class="book-card"><button class="book-cover" type="button"><span class="cover-art"><i></i><i></i><i></i></span><span class="cover-title"></span><small class="cover-author"></small></button><div class="book-info"><span class="book-title"></span><button class="more" aria-label="Book options">•••</button><small class="book-author"></small></div></article></template>
+    <script src="https://unpkg.com/jszip@3.10.1/dist/jszip.min.js"></script><script src="app.js"></script>
+  </body>
+</html>
