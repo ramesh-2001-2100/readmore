@@ -1,6 +1,6 @@
 # readmore
 
-A quiet, beautiful EPUB reader for the web.
+A quiet, beautiful **EPUB reader** for the web.
 
 I’ve tried many EPUB readers on iOS, Android, and the web. Most felt heavy, demanded sign-ups, or never quite captured that calm, book-like feeling. I wanted something lightweight I could just open in a browser—no accounts, no friction—and read comfortably on both mobile and desktop.
 
